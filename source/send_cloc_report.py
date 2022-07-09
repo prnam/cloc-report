@@ -65,7 +65,7 @@ def pygount_scan(cwd):
     repo_name = "".join(os.listdir())
     command = f"pygount --format=summary {quote(repo_name)}"
     result = subprocess.check_output(command, shell=True).decode("utf-8")
-    save_to_file = "file.txt"
+    save_to_file = "report.txt"
     with open(save_to_file, "w", encoding="utf-8") as file:
         file.write(result)
 
