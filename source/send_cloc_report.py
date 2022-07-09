@@ -52,9 +52,7 @@ for item in args.email:
 
 
 def clone_git_repo(repo_url):
-    """
-    Clone git repo
-    """
+    """Clone git repo"""
     with TemporaryDirectory() as tmp_dir:
         # print(os.path, os.curdir)
         print(f"Current working directoy: {os.getcwd()}")
@@ -70,9 +68,7 @@ def clone_git_repo(repo_url):
 
 
 def pygount_scan(cwd):
-    """
-    Scan the repo cloned and write the generate report to a file
-    """
+    """Scan the repo cloned and write the generate report to a file"""
     repo_name = "".join(os.listdir())
     command = f"pygount --format=summary {repo_name}"
     result = subprocess.check_output(shlex.quote(command), shell=True).decode("utf-8")
@@ -88,9 +84,7 @@ def pygount_scan(cwd):
 
 
 def send_email(file, to_recipient, repo_name):
-    """
-    Send report to necessary recevipents
-    """
+    """Send report to necessary recevipents"""
     print(
         requests.post(
             MAILGUN_API,
