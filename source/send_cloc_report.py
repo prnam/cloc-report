@@ -52,7 +52,6 @@ for item in args.email:
 def clone_git_repo(repo_url):
     """Clone git repo"""
     with TemporaryDirectory() as tmp_dir:
-        # print(os.path, os.curdir)
         print(f"Current working directoy: {os.getcwd()}")
         cwd = os.getcwd()
         print("Changing the directory....")
