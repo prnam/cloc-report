@@ -3,3 +3,4 @@ black
 pygount
 fpdf
 requests
+shellescape

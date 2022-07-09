@@ -2,11 +2,12 @@
 import argparse
 import os
 import re
-from shlex import quote
+# from shlex import quote
 import shutil
 import subprocess
 import sys
 from tempfile import TemporaryDirectory
+from shellescape import quote
 
 EMAIL_REGEX = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
 GIT_REGEX = r"((git|ssh|http(s)?)|(git@[\w\.]+))(:(\/\/)?)([\w\.@\:\/\-~]+)(\.git)(\/)?"
@@ -53,9 +54,9 @@ def clone_git_repo(repo_url):
         print("Changing the directory....")
         os.chdir(tmp_dir)
         print(f"Current working directoy: {os.getcwd()}")
-        clone = f"git clone {quote(repo_url)}"
-        print(f"Cloning repo using the command: {clone}")
-        os.system(clone)
+        clone_command = f"git clone {quote(repo_url)}"
+        print(f"Cloning repo using the command: {clone_command}")
+        os.system(clone_command)
         pygount_scan(cwd)
         print(f"Deleting the {tmp_dir} directory....")
 
