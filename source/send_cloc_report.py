@@ -78,5 +78,4 @@ def pygount_scan(cwd):
         print(file.read())
 
 
-
 clone_git_repo(REPO)
