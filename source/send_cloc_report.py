@@ -5,9 +5,10 @@ import argparse
 import os
 import re
 import shutil
+import subprocess
 import sys
 from tempfile import TemporaryDirectory
-import subprocess
+
 import requests
 
 EMAIL_REGEX = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
@@ -18,9 +19,11 @@ parser = argparse.ArgumentParser(
     prog="send-cloc-report",
     description="Process lines of code in a repo and send the generated report to an email address",
 )
-parser.add_argument(
-    "repo", action="store", type=str, help="enter the remote git repo url", nargs=1
-)
+parser.add_argument("repo",
+                    action="store",
+                    type=str,
+                    help="enter the remote git repo url",
+                    nargs=1)
 
 parser.add_argument(
     "-e",
@@ -47,8 +50,6 @@ for item in args.email:
         EMAILS = ",".join(item)
 
 
-
-
 def clone_git_repo(repo_url):
     """
     Clone git repo
@@ -72,10 +73,9 @@ def pygount_scan(cwd):
     Scan the repo cloned and write the generate report to a file
     """
     repo_name = "".join(os.listdir())
-    result = subprocess.check_output(
-        f"pygount --format=summary {repo_name}", shell=True
-    ).decode("utf-8")
-    file="report.txt"
+    result = subprocess.check_output(f"pygount --format=summary {repo_name}",
+                                     shell=True).decode("utf-8")
+    file = "report.txt"
     with open(file, "w", encoding="utf-8") as file:
         file.write(result)
 
@@ -85,18 +85,24 @@ def pygount_scan(cwd):
         print(file.read())
     send_email(file=file, to_recipient=EMAILS, repo_name=repo_name)
 
-def send_email(file,to_recipient, repo_name):
+
+def send_email(file, to_recipient, repo_name):
     """
     Send report to necessary recevipents
     """
-    print(requests.post(MAILGUN_API,
-                    auth=("api", "key-3ax6xnjp29jd6fds4gc373sgvjxteol0"),
-                    files=[("attachment", open(file, encoding="utf-8"))],
-                    data={"from": "Excited User <me@samples.mailgun.org>",
-                          "to": to_recipient,
-                          "subject": f"---- CLOC Report for '{repo_name}' repo ----",
-                          "text": "Testing some Mailgun awesomness!",
-                          "html": "<html>HTML version of the body</html>"}))
+    print(
+        requests.post(
+            MAILGUN_API,
+            auth=("api", "key-3ax6xnjp29jd6fds4gc373sgvjxteol0"),
+            files=[("attachment", open(file, encoding="utf-8"))],
+            data={
+                "from": "Excited User <me@samples.mailgun.org>",
+                "to": to_recipient,
+                "subject": f"---- CLOC Report for '{repo_name}' repo ----",
+                "text": "Testing some Mailgun awesomness!",
+                "html": "<html>HTML version of the body</html>",
+            },
+        ))
 
 
 clone_git_repo(REPO)
