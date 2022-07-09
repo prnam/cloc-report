@@ -4,11 +4,12 @@ Process lines of code in a repo and send the generated report to an email addres
 import argparse
 import os
 import re
+import shlex
 import shutil
 import subprocess
 import sys
 from tempfile import TemporaryDirectory
-import shlex
+
 import requests
 
 EMAIL_REGEX = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
@@ -74,7 +75,8 @@ def pygount_scan(cwd):
     """
     repo_name = "".join(os.listdir())
     command = "pygount --format=summary {0}".format(repo_name)
-    result = subprocess.check_output(shlex.quote(command), shell=True).decode("utf-8")
+    result = subprocess.check_output(shlex.quote(command),
+                                     shell=True).decode("utf-8")
     file = "report.txt"
     with open(file, "w", encoding="utf-8") as file:
         file.write(result)
