@@ -16,11 +16,9 @@ parser = argparse.ArgumentParser(
     prog="send-cloc-report",
     description="CLOC in a repo and send the generated report to an email address",
 )
-parser.add_argument("repo",
-                    action="store",
-                    type=str,
-                    help="enter the remote git repo url",
-                    nargs=1)
+parser.add_argument(
+    "repo", action="store", type=str, help="enter the remote git repo url", nargs=1
+)
 
 parser.add_argument(
     "-e",
@@ -57,7 +55,7 @@ def clone_git_repo(repo_url):
         print(f"Current working directoy: {os.getcwd()}")
         clone = f"git clone {quote(repo_url)}"
         print(f"Cloning repo using the command: {clone}")
-        os.system(quote(clone))
+        os.system(clone)
         pygount_scan(cwd)
         print(f"Deleting the {tmp_dir} directory....")
 
@@ -66,15 +64,14 @@ def pygount_scan(cwd):
     """Scan the repo cloned and write the generate report to a file"""
     repo_name = "".join(os.listdir())
     command = f"pygount --format=summary {quote(repo_name)}"
-    result = subprocess.check_output(quote(command),
-                                     shell=True).decode("utf-8")
-    file = "report.txt"
-    with open(file, "w", encoding="utf-8") as file:
+    result = subprocess.check_output(command, shell=True).decode("utf-8")
+    save_to_file = "file.txt"
+    with open(save_to_file, "w", encoding="utf-8") as file:
         file.write(result)
 
-    shutil.copy2(file, cwd)
+    shutil.copy2(save_to_file, cwd)
     print(f"---- CLOC Report for '{repo_name}' repo ----")
-    with open(file, "r", encoding="utf-8") as file:
+    with open(save_to_file, "r", encoding="utf-8") as file:
         print(file.read())
 
 
