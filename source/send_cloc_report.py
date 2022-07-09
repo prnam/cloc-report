@@ -8,7 +8,7 @@ import shutil
 import subprocess
 import sys
 from tempfile import TemporaryDirectory
-
+import shlex
 import requests
 
 EMAIL_REGEX = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
@@ -63,7 +63,7 @@ def clone_git_repo(repo_url):
         print(f"Current working directoy: {os.getcwd()}")
         clone = f"git clone {repo_url}"
         print(f"Cloning repo using the command: {clone}")
-        os.system(clone)
+        os.system(shlex.quote(clone))
         pygount_scan(cwd)
         print(f"Deleting the {tmp_dir} directory....")
 
@@ -73,8 +73,8 @@ def pygount_scan(cwd):
     Scan the repo cloned and write the generate report to a file
     """
     repo_name = "".join(os.listdir())
-    result = subprocess.check_output(f"pygount --format=summary {repo_name}",
-                                     shell=True).decode("utf-8")
+    command = "pygount --format=summary {0}".format(repo_name)
+    result = subprocess.check_output(shlex.quote(command), shell=True).decode("utf-8")
     file = "report.txt"
     with open(file, "w", encoding="utf-8") as file:
         file.write(result)
