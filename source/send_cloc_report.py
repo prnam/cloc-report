@@ -18,7 +18,7 @@ MAILGUN_API = "https://api.mailgun.net/v2/samples.mailgun.org/messages"
 
 parser = argparse.ArgumentParser(
     prog="send-cloc-report",
-    description="Process lines of code in a repo and send the generated report to an email address",
+    description="CLOC in a repo and send the generated report to an email address",
 )
 parser.add_argument("repo",
                     action="store",
