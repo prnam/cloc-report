@@ -4,11 +4,12 @@ Process lines of code in a repo and send the generated report to an email addres
 import argparse
 import os
 import re
+import shlex
 import shutil
 import subprocess
 import sys
 from tempfile import TemporaryDirectory
-import shlex
+
 import requests
 
 EMAIL_REGEX = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
