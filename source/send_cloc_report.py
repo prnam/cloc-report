@@ -2,10 +2,10 @@
 import argparse
 import os
 import re
-from shlex import quote
 import shutil
 import subprocess
 import sys
+from shlex import quote
 from tempfile import TemporaryDirectory
 
 EMAIL_REGEX = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
@@ -16,9 +16,11 @@ parser = argparse.ArgumentParser(
     prog="send-cloc-report",
     description="CLOC in a repo and send the generated report to an email address",
 )
-parser.add_argument(
-    "repo", action="store", type=str, help="enter the remote git repo url", nargs=1
-)
+parser.add_argument("repo",
+                    action="store",
+                    type=str,
+                    help="enter the remote git repo url",
+                    nargs=1)
 
 parser.add_argument(
     "-e",
