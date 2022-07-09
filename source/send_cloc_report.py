@@ -2,10 +2,10 @@
 import argparse
 import os
 import re
-from shlex import quote
 import shutil
 import subprocess
 import sys
+from shlex import quote
 from tempfile import TemporaryDirectory
 
 EMAIL_REGEX = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
