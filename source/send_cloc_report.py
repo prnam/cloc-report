@@ -1,6 +1,4 @@
-"""
-Process lines of code in a repo and send the generated report to an email address
-"""
+"""Process lines of code in a repo and send the generated report to an email address"""
 import argparse
 import os
 import re
