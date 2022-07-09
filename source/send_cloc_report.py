@@ -58,7 +58,7 @@ def clone_git_repo(repo_url):
         print(f"Current working directoy: {os.getcwd()}")
         clone_command = f"git clone {quote(repo_url)}"
         print(f"Cloning repo using the command: {clone_command}")
-        os.system(clone_command)
+        os.system(f"git clone {quote(repo_url)}")
         pygount_scan(cwd)
         print(f"Deleting the {tmp_dir} directory....")
 
@@ -67,7 +67,7 @@ def pygount_scan(cwd):
     """Scan the repo cloned and write the generate report to a file"""
     repo_name = "".join(os.listdir())
     command = f"pygount --format=summary {quote(repo_name)}"
-    result = subprocess.check_output(command, shell=True).decode("utf-8")
+    result = subprocess.check_output(f"pygount --format=summary {quote(repo_name)}", shell=True).decode("utf-8")
     save_to_file = "report.txt"
     with open(save_to_file, "w", encoding="utf-8") as file:
         file.write(result)
