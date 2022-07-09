@@ -2,7 +2,7 @@
 import argparse
 import os
 import re
-import shlex
+from shlex import quote
 import shutil
 import subprocess
 import sys
@@ -55,9 +55,9 @@ def clone_git_repo(repo_url):
         print("Changing the directory....")
         os.chdir(tmp_dir)
         print(f"Current working directoy: {os.getcwd()}")
-        clone = f"git clone {repo_url}"
+        clone = f"git clone {quote(repo_url)}"
         print(f"Cloning repo using the command: {clone}")
-        os.system(shlex.quote(clone))
+        os.system(quote(clone))
         pygount_scan(cwd)
         print(f"Deleting the {tmp_dir} directory....")
 
@@ -65,8 +65,8 @@ def clone_git_repo(repo_url):
 def pygount_scan(cwd):
     """Scan the repo cloned and write the generate report to a file"""
     repo_name = "".join(os.listdir())
-    command = f"pygount --format=summary {repo_name}"
-    result = subprocess.check_output(shlex.quote(command),
+    command = f"pygount --format=summary {quote(repo_name)}"
+    result = subprocess.check_output(quote(command),
                                      shell=True).decode("utf-8")
     file = "report.txt"
     with open(file, "w", encoding="utf-8") as file:
