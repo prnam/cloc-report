@@ -8,8 +8,6 @@ import subprocess
 import sys
 from tempfile import TemporaryDirectory
 
-import requests
-
 EMAIL_REGEX = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
 GIT_REGEX = r"((git|ssh|http(s)?)|(git@[\w\.]+))(:(\/\/)?)([\w\.@\:\/\-~]+)(\.git)(\/)?"
 MAILGUN_API = "https://api.mailgun.net/v2/samples.mailgun.org/messages"
@@ -78,24 +76,7 @@ def pygount_scan(cwd):
     print(f"---- CLOC Report for '{repo_name}' repo ----")
     with open(file, "r", encoding="utf-8") as file:
         print(file.read())
-    send_email(file=file, to_recipient=EMAILS, repo_name=repo_name)
 
-
-def send_email(file, to_recipient, repo_name):
-    """Send report to necessary recevipents"""
-    print(
-        requests.post(
-            MAILGUN_API,
-            auth=("api", "key-3ax6xnjp29jd6fds4gc373sgvjxteol0"),
-            files=[("attachment", open(file, encoding="utf-8"))],
-            data={
-                "from": "Excited User <me@samples.mailgun.org>",
-                "to": to_recipient,
-                "subject": f"---- CLOC Report for '{repo_name}' repo ----",
-                "text": "Testing some Mailgun awesomness!",
-                "html": "<html>HTML version of the body</html>",
-            },
-        ))
 
 
 clone_git_repo(REPO)
