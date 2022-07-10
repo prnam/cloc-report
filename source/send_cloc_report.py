@@ -57,9 +57,9 @@ def pygount_scan(cwd: str, emails: list, temporary_working_directory: str):
             shutil.copy2(save_to_file, cwd)
             logging.info("Report stored at %s with file name %s", cwd, save_to_file)
             print(f"Report stored at {cwd} with file name {save_to_file}")
-    logging.debug("---- CLOC Report for '%s' repo ----", repo_name)
+    logging.debug("---- CLoC report for '%s' repo ----", repo_name)
     logging.debug(read_file(save_to_file, temporary_working_directory))
-    print(f"---- CLOC Report for '{repo_name}' repo ----")
+    print(f"---- CLoC report for '{repo_name}' repo ----")
     print(read_file(save_to_file, temporary_working_directory))
 
 
@@ -85,7 +85,7 @@ def send_email(
             data={
                 "from": MAILGUN_FROM,
                 "to": to_recipients,
-                "subject": f'---- CLOC Report for "{repo_name}" repo ----',
+                "subject": f'---- CLoC report for "{repo_name}" repo ----',
                 "text": {content},
             },
         )
