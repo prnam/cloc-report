@@ -151,7 +151,7 @@ def input_validation(repo: str, emails: Optional[list] = None):
 def main():
     """Invoking main method to intitate the program"""
     logging.basicConfig(
-        format="%(asctime)s %(levelname)s: %(message)s",
+        format="%(asctime)s %(levelname)s [send-cloc-report]  %(message)s",
         filename="myapp.log",
         level=logging.DEBUG,
     )
