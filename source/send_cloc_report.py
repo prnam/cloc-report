@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Process lines of code in a repo and send the generated report to an email address"""
 from __future__ import absolute_import
 import argparse
