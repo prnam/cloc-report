@@ -54,8 +54,6 @@ def pygount_scan(cwd: str, emails: list, temporary_working_directory: str):
         print(f"Report stored at {cwd} with file name {save_to_file}")
     logging.debug("---- CLOC Report for %s repo ----", repo_name)
     logging.debug(read_file(save_to_file, temporary_working_directory))
-    # with open(save_to_file, "r", encoding="utf-8") as file:
-    #     logging.debug(file.read())
 
 
 def read_file(filename: str, temporary_working_directory: str):
@@ -73,8 +71,6 @@ def send_email(
     logging.info("Preparing email....")
     print("Preparing email....")
     content = read_file(report, temporary_working_dir)
-    # with open(report, encoding="utf-8") as file:
-    #     content = file.read()
     logging.info("File is been read to email text")
     try:
         return requests.post(
