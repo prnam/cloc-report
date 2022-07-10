@@ -1,4 +1,5 @@
 """Process lines of code in a repo and send the generated report to an email address"""
+from __future__ import absolute_import
 import argparse
 import logging
 import os
@@ -58,9 +59,8 @@ def pygount_scan(cwd: str, emails: list, temporary_working_directory: str):
 
 def read_file(filename: str, temporary_working_directory: str):
     """Read files"""
-    with open(
-        f"{quote(temporary_working_directory)}/{quote(filename)}", "r", encoding="utf-8"
-    ) as file:
+    absolute_path = f"{quote(temporary_working_directory)}/{quote(filename)}"
+    with open(absolute_path, "r", encoding="utf-8") as file:
         return file.read()
 
 
