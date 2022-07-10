@@ -36,7 +36,9 @@ def clone_git_repo(repo_url: str, emails: list):
         logging.info("Deleting the %s directory....", tmp_dir)
 
 
-def pygount_scan(cwd: str, temporary_working_directory: str, emails: Optional[list] = None):
+def pygount_scan(
+    cwd: str, temporary_working_directory: str, emails: Optional[list] = None
+):
     """Scan the repo cloned and write the generate report to a file"""
     repo_name = "".join(os.listdir())
     command = f"pygount --format=summary {quote(repo_name)}"
