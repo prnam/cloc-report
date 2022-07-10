@@ -39,7 +39,7 @@
 
 Please follow the steps mentioned in earlier step but use the devcontainer to auto setup docker based developer workspace. If you are using other method please ensure you use `source/requirements-dev.txt`
 
-## Commands to run the script
+### Commands to run the script
 
 1. Get Help
 ```python
