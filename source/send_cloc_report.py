@@ -98,6 +98,7 @@ def send_email(
     except requests.exceptions.RequestException as request_exception_error:
         logging.error(request_exception_error)
         print("Unknown error while connecting to your mail service")
+        print("Please check mail service configuration and status page")
         sys.exit(1)
 
 
