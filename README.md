@@ -42,10 +42,18 @@ Please follow the steps mentioned in earlier step but use the devcontainer to au
 ## Commands to run the script
 
 1. Get Help
-``sh
+``python
 python3 send_cloc_report.py -h
 ```
-2. Scan a repo and stdout the result
-``sh
+
+2. Scan a repo and stdout the report
+
+``python
 python3 send_cloc_report.py https://github.com/prnam/learn-python.git
+```
+
+2. Scan a repo and send report to email address specified
+
+``python
+python3 send_cloc_report.py https://github.com/prnam/learn-python.git -e abc@efg.com xyz@abc.in
 ```
