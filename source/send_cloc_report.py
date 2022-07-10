@@ -1,5 +1,6 @@
 """Process lines of code in a repo and send the generated report to an email address"""
 from __future__ import absolute_import
+
 import argparse
 import logging
 import os
@@ -8,6 +9,7 @@ import shutil
 import subprocess
 import sys
 from tempfile import TemporaryDirectory
+
 import requests
 from shellescape import quote
 
@@ -30,7 +32,8 @@ def clone_git_repo(repo_url: str, emails: list):
         clone_command = f"git clone {quote(repo_url)}"
         logging.info("Cloning repo using the command: %s", clone_command)
         os.system(clone_command)
-        pygount_scan(current_working_directory, emails, temporary_working_directory)
+        pygount_scan(current_working_directory, emails,
+                     temporary_working_directory)
         logging.info("Deleting the %s directory....", tmp_dir)
 
 
@@ -42,7 +45,8 @@ def pygount_scan(cwd: str, emails: list, temporary_working_directory: str):
     save_to_file = f"cloc-report-{repo_name.lower()}.txt"
     with open(save_to_file, "w", encoding="utf-8") as file:
         file.write(result)
-    response = send_email(save_to_file, repo_name, emails, temporary_working_directory)
+    response = send_email(save_to_file, repo_name, emails,
+                          temporary_working_directory)
     if response.status_code == 200:
         logging.info("Email sent successfully")
         print("Email sent successfully")
@@ -51,7 +55,8 @@ def pygount_scan(cwd: str, emails: list, temporary_working_directory: str):
         logging.info("Please check mail service configuration and status page")
         logging.info("Copying the report to your local persistent storage")
         shutil.copy2(save_to_file, cwd)
-        logging.info("Report stored at %s with file name %s", cwd, save_to_file)
+        logging.info("Report stored at %s with file name %s", cwd,
+                     save_to_file)
         print(f"Report stored at {cwd} with file name {save_to_file}")
     logging.debug("---- CLOC Report for %s repo ----", repo_name)
     logging.debug(read_file(save_to_file, temporary_working_directory))
@@ -64,9 +69,8 @@ def read_file(filename: str, temporary_working_directory: str):
         return file.read()
 
 
-def send_email(
-    report: str, repo_name: str, to_recipients: list, temporary_working_dir: str
-):
+def send_email(report: str, repo_name: str, to_recipients: list,
+               temporary_working_dir: str):
     """Send the report to email address"""
     logging.info("Preparing email....")
     print("Preparing email....")
@@ -108,9 +112,11 @@ def argument_parser():
         prog="send-cloc-report",
         description="CLOC in a repo and send the generated report to an email address",
     )
-    parser.add_argument(
-        "repo", action="store", type=str, help="enter the remote git repo url", nargs=1
-    )
+    parser.add_argument("repo",
+                        action="store",
+                        type=str,
+                        help="enter the remote git repo url",
+                        nargs=1)
 
     parser.add_argument(
         "-e",
@@ -135,7 +141,8 @@ def input_validation(repo: str, emails: list):
 
     for email in emails:
         if not re.match(EMAIL_REGEX, email):
-            logging.error("One of the email is invalid, please fix it and re try!!!")
+            logging.error(
+                "One of the email is invalid, please fix it and re try!!!")
             sys.exit(1)
     return repo, emails
 
@@ -150,9 +157,8 @@ def main():
     print("Program started....")
     logging.info("Program started....")
     args_parser_result = argument_parser()
-    input_validation_result = input_validation(
-        args_parser_result[0], args_parser_result[1]
-    )
+    input_validation_result = input_validation(args_parser_result[0],
+                                               args_parser_result[1])
     clone_git_repo(input_validation_result[0], input_validation_result[1])
     print("Program completed gracefully")
     logging.info("Program completed gracefully")
