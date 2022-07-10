@@ -8,7 +8,6 @@ import shutil
 import subprocess
 import sys
 from tempfile import TemporaryDirectory
-from tkinter import N
 from typing import Optional
 import requests
 from shellescape import quote
