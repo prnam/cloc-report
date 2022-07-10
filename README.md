@@ -43,17 +43,17 @@ Please follow the steps mentioned in earlier step but use the devcontainer to au
 
 1. Get Help
 ```python
-python3 send_cloc_report.py -h
+send_cloc_report.py -h
 ```
 
 2. Scan a repo and stdout the report
 
 ```python
-python3 send_cloc_report.py https://github.com/prnam/learn-python.git
+send_cloc_report.py https://github.com/prnam/learn-python.git
 ```
 
 2. Scan a repo and send report to email address specified
 
 ```python
-python3 send_cloc_report.py https://github.com/prnam/learn-python.git -e abc@efg.com xyz@abc.in
+send_cloc_report.py https://github.com/prnam/learn-python.git -e abc@efg.com xyz@abc.in
 ```
