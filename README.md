@@ -57,3 +57,7 @@ send_cloc_report.py https://github.com/prnam/learn-python.git
 ```python
 send_cloc_report.py https://github.com/prnam/learn-python.git -e abc@efg.com xyz@abc.in
 ```
+
+```python
+send_cloc_report.py https://github.com/prnam/learn-python.git --email abc@efg.com xyz@abc.in
+```
