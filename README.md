@@ -1,6 +1,6 @@
 # supreme-fortnight
 
-### Pre-requisites
+### Pre-requisites to run the script
 
 1. You must install `Python 3.10`
 2. You must install the `pip` packages in your virtual environment. Packages are listed in `source/requirements.txt`
@@ -35,3 +35,17 @@
     
 6. Optionally, you can set right log `level` for your python to read what is happening in the backend
 
+### Pre-requisites to develop
+
+Please follow the steps mentioned in earlier step but use the devcontainer to auto setup docker based developer workspace. If you are using other method please ensure you use `source/requirements-dev.txt`
+
+## Commands to run the script
+
+1. Get Help
+``sh
+python3 send_cloc_report.py -h
+```
+2. Scan a repo and stdout the result
+``sh
+python3 send_cloc_report.py https://github.com/prnam/learn-python.git
+```
