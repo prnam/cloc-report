@@ -50,7 +50,8 @@ def pygount_scan(cwd: str, emails: list):
         logging.info("Please check mail service configuration and status page")
         logging.info("Copying the report to your local persistent storage")
         shutil.copy2(save_to_file, cwd)
-        logging.info("Report stored at %s with file name %s", cwd, save_to_file)
+        logging.info("Report stored at %s with file name %s", cwd,
+                     save_to_file)
     logging.debug("---- CLOC Report for %s repo ----", repo_name)
     with open(save_to_file, "r", encoding="utf-8") as file:
         logging.debug(file.read())
@@ -81,9 +82,11 @@ def argument_parser():
         prog="send-cloc-report",
         description="CLOC in a repo and send the generated report to an email address",
     )
-    parser.add_argument(
-        "repo", action="store", type=str, help="enter the remote git repo url", nargs=1
-    )
+    parser.add_argument("repo",
+                        action="store",
+                        type=str,
+                        help="enter the remote git repo url",
+                        nargs=1)
 
     parser.add_argument(
         "-e",
@@ -108,7 +111,8 @@ def input_validation(repo: str, emails: list):
 
     for email in emails:
         if not re.match(EMAIL_REGEX, email):
-            logging.error("One of the email is invalid, please fix it and re try!!!")
+            logging.error(
+                "One of the email is invalid, please fix it and re try!!!")
             sys.exit(1)
     return repo, emails
 
@@ -118,9 +122,8 @@ def main():
     print("Program started....")
     logging.info("Program started....")
     args_parser_result = argument_parser()
-    input_validation_result = input_validation(
-        args_parser_result[0], args_parser_result[1]
-    )
+    input_validation_result = input_validation(args_parser_result[0],
+                                               args_parser_result[1])
     clone_git_repo(input_validation_result[0], input_validation_result[1])
     print("Program completed gracefully")
     logging.info("Program completed gracefully")
