@@ -32,11 +32,11 @@ def clone_git_repo(repo_url: str, emails: list):
         clone_command = f"git clone {quote(repo_url)}"
         logging.info("Cloning repo using the command: %s", clone_command)
         os.system(clone_command)
-        pygount_scan(current_working_directory, emails, temporary_working_directory)
+        pygount_scan(current_working_directory, temporary_working_directory, emails)
         logging.info("Deleting the %s directory....", tmp_dir)
 
 
-def pygount_scan(cwd: str, emails: list, temporary_working_directory: str):
+def pygount_scan(cwd: str, temporary_working_directory: str, emails: Optional[list] = None):
     """Scan the repo cloned and write the generate report to a file"""
     repo_name = "".join(os.listdir())
     command = f"pygount --format=summary {quote(repo_name)}"
@@ -46,7 +46,7 @@ def pygount_scan(cwd: str, emails: list, temporary_working_directory: str):
         file.write(result)
     if emails is not None:
         response = send_email(
-            save_to_file, repo_name, emails, temporary_working_directory
+            save_to_file, repo_name, temporary_working_directory, emails
         )
         if response.status_code == 200:
             logging.info("Email sent successfully")
@@ -72,7 +72,7 @@ def read_file(filename: str, temporary_working_directory: str):
 
 
 def send_email(
-    report: str, repo_name: str, to_recipients: list, temporary_working_dir: str
+    report: str, repo_name: str, temporary_working_dir: str, to_recipients: list
 ):
     """Send the report to email address"""
     logging.info("Preparing email....")
