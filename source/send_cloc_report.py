@@ -43,6 +43,7 @@ def pygount_scan(cwd: str, emails: list):
     response = send_email(save_to_file, repo_name, emails)
     if response.status_code == 200:
         logging.info("Email sent successfully")
+        print("Email sent successfully")
     else:
         logging.warning("Failed to send email to the requested recipients")
         logging.info("Please check mail service configuration and status page")
@@ -57,6 +58,7 @@ def pygount_scan(cwd: str, emails: list):
 def send_email(report: str, repo_name: str, to_recipients: list):
     """Send the report to email address"""
     logging.info("Preparing email....")
+    print("Preparing email....")
     with open(report, encoding="utf-8") as file:
         content = file.read()
     logging.info("File is been read to email text")
@@ -112,11 +114,15 @@ def input_validation(repo: str, emails: list):
 
 def main():
     """Invoking main method to intitate the program"""
+    print("Program started....")
+    logging.info("Program started....")
     args_parser_result = argument_parser()
     input_validation_result = input_validation(
         args_parser_result[0], args_parser_result[1]
     )
     clone_git_repo(input_validation_result[0], input_validation_result[1])
+    print("Program completed gracefully")
+    logging.info("Program completed gracefully")
 
 
 if __name__ == "__main__":
