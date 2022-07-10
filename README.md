@@ -7,17 +7,31 @@
 3. You must signup for Mailgun service to send email to intrested recipients
 4. Interested recipients must be added to **Authorized Recipients** in Mailgun service
 5. Set environment vairables - `MAILGUN_API`, `MAILGUN_API_KEY`, `MAILGUN_FROM`
-- MacOS
-```zsh
-export MAILGUN_API=
-```
+    - MacOS & Linux
+    ```zsh
+    export MAILGUN_API=
+    ```
 
-```zsh
-export MAILGUN_API_KEY=
-```
+    ```zsh
+    export MAILGUN_API_KEY=
+    ```
 
-```zsh
-export MAILGUN_FROM=
-```
+    ```zsh
+    export MAILGUN_FROM=
+    ```
+    
+    - Windows
+    ```pwsh
+    set MAILGUN_API=
+    ```
+
+    ```pwsh
+    set MAILGUN_API_KEY=
+    ```
+
+    ```pwsh
+    set MAILGUN_FROM=
+    ```
+    
 6. Optionally, you can set right log `level` for your python to read what is happening in the backend
 
