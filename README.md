@@ -41,7 +41,7 @@ Please follow the steps mentioned in earlier step but use the devcontainer to au
 
 ### Commands to run the script
 
-1. Get Help
+1. Get help
 ```python
 send_cloc_report.py -h
 ```
