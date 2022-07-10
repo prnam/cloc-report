@@ -48,12 +48,12 @@ python3 send_cloc_report.py -h
 
 2. Scan a repo and stdout the report
 
-``python
+```python
 python3 send_cloc_report.py https://github.com/prnam/learn-python.git
 ```
 
 2. Scan a repo and send report to email address specified
 
-``python
+```python
 python3 send_cloc_report.py https://github.com/prnam/learn-python.git -e abc@efg.com xyz@abc.in
 ```
